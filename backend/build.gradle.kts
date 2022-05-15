@@ -26,6 +26,8 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	runtimeOnly("com.h2database:h2")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -45,12 +47,11 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
-springBoot {
-	mainClass.set("com.demo.marketink.MarketInkApplicationKt")
-}
-
 heroku {
 	jdkVersion = "11"
 	appName = "market-ink"
-	processTypes = mapOf("web" to "java -Dserver.port=\$PORT -jar build/libs/market-ink-0.0.1-SNAPSHOT.jar")
+	processTypes = mapOf("web" to "java " +
+			"-Dserver.port=\$PORT " +
+			"-Dspring.profiles.active=prod " +
+			"-jar build/libs/market-ink-0.0.1-SNAPSHOT.jar")
 }
