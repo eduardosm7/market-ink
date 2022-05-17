@@ -29,6 +29,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	runtimeOnly("com.h2database:h2")
 	runtimeOnly("org.postgresql:postgresql")
+	implementation("org.liquibase:liquibase-core")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -46,6 +47,7 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+	systemProperty("spring.profiles.active", "test")
 }
 
 heroku {
@@ -55,4 +57,5 @@ heroku {
 			"-Dserver.port=\$PORT " +
 			"-Dspring.profiles.active=prod " +
 			"-jar build/libs/market-ink-0.0.1-SNAPSHOT.jar")
+	configVars = mapOf("GRADLE_TASK" to "clean build")
 }
