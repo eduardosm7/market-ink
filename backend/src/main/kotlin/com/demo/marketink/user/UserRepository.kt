@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface UserRepository : JpaRepository<User, Long> {
     fun findByExternalId(externalId: UUID): Optional<User>
+    fun findByName(name: String): Optional<User>
 }
