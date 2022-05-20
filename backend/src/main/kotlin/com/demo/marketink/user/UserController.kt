@@ -1,7 +1,5 @@
 package com.demo.marketink.user
 
-import com.demo.marketink.user.dto.CreateOrUpdateUserDto
-import com.demo.marketink.user.dto.UserResponseDto
 import java.util.Optional
 import java.util.UUID
 import java.util.stream.Collectors

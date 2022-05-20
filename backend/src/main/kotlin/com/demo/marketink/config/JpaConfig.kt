@@ -15,6 +15,7 @@ class JpaConfig {
 
 class AuditorAwareImpl : AuditorAware<String> {
     // Can use Spring Security to return currently logged in user
-    // return ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername()
+    // return SecurityContextHolder.getContext().authentication.principal as String
+    // TODO: Configure proper current auditor
     override fun getCurrentAuditor(): Optional<String> = Optional.of("dummy")
 }

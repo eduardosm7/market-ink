@@ -1,13 +1,15 @@
 package com.demo.marketink.common
 
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 
 internal class AuditableEntityTest {
 
+    internal class AuditableEntityDummyImpl : AuditableEntity<String>()
+
     @Test
-    fun delete() {
+    fun `should set isDeleted to true when delete is called`() {
         // Given
         val entity = AuditableEntityDummyImpl()
 
@@ -15,8 +17,6 @@ internal class AuditableEntityTest {
         entity.delete()
 
         // Then
-        Assertions.assertThat(entity.isDeleted).isTrue
+        assertThat(entity.isDeleted).isTrue
     }
 }
-
-internal class AuditableEntityDummyImpl : AuditableEntity<String>()
